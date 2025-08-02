@@ -34,15 +34,77 @@ const Index = () => {
       price: '1,599 ₽',
       image: '/img/ec8b18da-944d-4870-8c01-73eb43ec34cc.jpg',
       description: 'Полный комплекс витаминов и минералов'
+    },
+    {
+      id: 5,
+      name: 'Коэнзим Q10',
+      price: '1,899 ₽',
+      image: '/img/409234d0-b83b-4fc1-ba81-6e80a83f99be.jpg',
+      description: 'Мощный антиоксидант для энергии клеток'
+    },
+    {
+      id: 6,
+      name: 'Железо + Витамин C',
+      price: '649 ₽',
+      image: '/img/ec8b18da-944d-4870-8c01-73eb43ec34cc.jpg',
+      description: 'Профилактика анемии и укрепление иммунитета'
+    },
+    {
+      id: 7,
+      name: 'Цинк + Селен',
+      price: '799 ₽',
+      image: '/img/409234d0-b83b-4fc1-ba81-6e80a83f99be.jpg',
+      description: 'Поддержка мужского здоровья и иммунитета'
+    },
+    {
+      id: 8,
+      name: 'Кальций + Витамин К2',
+      price: '1,099 ₽',
+      image: '/img/ec8b18da-944d-4870-8c01-73eb43ec34cc.jpg',
+      description: 'Укрепление костей и зубов'
+    },
+    {
+      id: 9,
+      name: 'Лецитин',
+      price: '949 ₽',
+      image: '/img/409234d0-b83b-4fc1-ba81-6e80a83f99be.jpg',
+      description: 'Поддержка работы мозга и печени'
+    },
+    {
+      id: 10,
+      name: 'Куркумин Форте',
+      price: '1,399 ₽',
+      image: '/img/ec8b18da-944d-4870-8c01-73eb43ec34cc.jpg',
+      description: 'Натуральный противовоспалительный комплекс'
+    },
+    {
+      id: 11,
+      name: 'Пробиотики',
+      price: '1,749 ₽',
+      image: '/img/409234d0-b83b-4fc1-ba81-6e80a83f99be.jpg',
+      description: 'Восстановление микрофлоры кишечника'
+    },
+    {
+      id: 12,
+      name: 'Мелатонин',
+      price: '599 ₽',
+      image: '/img/ec8b18da-944d-4870-8c01-73eb43ec34cc.jpg',
+      description: 'Нормализация сна и биоритмов'
     }
   ];
+
+  const handleBuyClick = (productName: string, price: string) => {
+    const message = `Хочу купить ${productName} за ${price}`;
+    const telegramUrl = `https://t.me/sovasova_bot?start=${encodeURIComponent(message)}`;
+    window.open(telegramUrl, '_blank');
+  };
 
   return (
     <div className="min-h-screen bg-background flex">
       {/* Main Content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-8 overflow-y-auto">
         {activeTab === 'catalog' && (
-          <div className="max-w-4xl">
+          <div className="max-w-6xl mr-80">
             <div className="mb-8">
               <h1 className="text-4xl font-heading font-bold text-foreground mb-4">
                 Каталог БАДов
@@ -52,7 +114,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <Card key={product.id} className="p-6 hover:shadow-lg transition-shadow">
                   <div className="flex flex-col h-full">
@@ -75,7 +137,10 @@ const Index = () => {
                       <span className="text-2xl font-heading font-bold text-primary">
                         {product.price}
                       </span>
-                      <Button className="bg-primary hover:bg-primary/90 text-white">
+                      <Button 
+                        className="bg-primary hover:bg-primary/90 text-white"
+                        onClick={() => handleBuyClick(product.name, product.price)}
+                      >
                         <Icon name="ShoppingCart" size={16} className="mr-2" />
                         Купить
                       </Button>
@@ -88,7 +153,7 @@ const Index = () => {
         )}
 
         {activeTab === 'about' && (
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mr-80">
             <div className="mb-8">
               <h1 className="text-4xl font-heading font-bold text-foreground mb-4">
                 О компании СоваСова
@@ -196,7 +261,7 @@ const Index = () => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="w-80 bg-sidebar border-l border-sidebar-border flex flex-col">
+      <div className="w-80 bg-sidebar border-l border-sidebar-border flex flex-col fixed right-0 top-0 h-screen">
         {/* Logo */}
         <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center justify-center">
